@@ -8,8 +8,8 @@ public class CommandHandler
 	{
 		ArrayList<String> commandList = new ArrayList<String>();
 		String goCommand = "go";
-		boolean upCommand = false;
-		boolean putCommand = false;
+		boolean up = false;
+		boolean put = false;
 		// If user didn't enter anything in, print error and return.
 		if (command == null)
 		{
@@ -124,7 +124,7 @@ public class CommandHandler
 			if (commandList.get(1).equals("up") && commandList.size() > 2)
 			{
 				commandList.remove(1);
-				upCommand = true;
+				up = true;
 			}
 			if (Main.getGame().getCurrentLocation().getItems().size() < 1)
 			{
@@ -170,14 +170,15 @@ public class CommandHandler
 		// End command: TAKE/PICK(UP)/GRAB/GET
 		
 		// COMMAND: DROP/PUT(DOWN)/LEAVE
-		if (commandList.get(0).equals("drop") || commandList.get(0).equals("put") || commandList.get(0).equals("leave"))
+		if (commandList.get(0).equals("drop")
+				|| commandList.get(0).equals("put")
+				|| commandList.get(0).equals("leave"))
 		{
-			if (commandList.get(1).equals("put") && commandList.size() > 2)
+			if (commandList.get(1).equals("up") && commandList.size() > 2)
 			{
 				commandList.remove(1);
-				putCommand = true;
+				up = true;
 			}
-			
 			if (Main.getGame().getCurrentLocation().getItems().size() < 1)
 			{
 				return false;
@@ -191,27 +192,29 @@ public class CommandHandler
 					// If the item in the command is found
 					if (commandList.get(i1 + 1).equals(Main.getGame().getCurrentLocation().getItems().get(i).getTitle()))
 					{
-						// Add item to inventory
-						Main.getGame().removeInventoryItem(Main.getGame().getCurrentLocation().getItems().get(i));
-						// Remove item from location
-						Main.getGame().getCurrentLocation().addItem(Main.getGame().getCurrentLocation().getItems().get(i));
-						return false;
+						// If item is takeable
+						if (Main.getGame().getCurrentLocation().getItems().get(i).isTakeable())
+						{
+							// Add item to inventory
+							Main.getGame().removeInventoryItem(Main.getGame().getInventory().get(i));
+							// Remove item from location
+							Main.getGame().getCurrentLocation().addItem(Main.getGame().getInventory().get(i));
+							return false;
+						}
 					}
 				}
 			}
 			
-			// Try to print error message with item name
-			try 
+			try // Try to print error message with item name
 			{
 				System.out.println("You can't see a " + commandList.get(1) + " here.");
 				return false;
 			}
-			// Catch the possible exception but don't do anything
-			catch (IndexOutOfBoundsException e) {}
+			catch (IndexOutOfBoundsException e) {} // Catch the possible exception but don't do anything
 			
-			if (putCommand && commandList.size() < 3)
+			if (commandList.get(1).equals("down") && commandList.size() < 3)
 			{
-				System.out.println("What do you want to pick up?");
+				System.out.println("What do you want to put down?");
 				return false;
 			}
 			System.out.println("What do you want to " + commandList.get(0) + "?");

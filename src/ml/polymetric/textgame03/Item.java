@@ -18,7 +18,7 @@ public class Item
 	}
 	
 	// Full Constructor
-	public Item(String title, String shortDesc, String description, boolean takeable)
+	public Item(String title, String description, String shortDesc, boolean takeable)
 	{
 		this.itemTitle = title;
 		this.itemDescription = description;

@@ -34,21 +34,24 @@ public class CommandHandler
 		
 		try
 		{
-			for (int i = 0; i < Exit.dirName.length; i++)
+			if (commandList.size() < 3)
 			{
-				if (commandList.get(0).equals(Exit.dirName[i].toLowerCase())
-						|| commandList.get(0).equals(Exit.shortDirName[i].toLowerCase()))
+				for (int i = 0; i < Exit.dirName.length; i++)
 				{
-					for (int i1 = 0; i1 < Main.getGame().getCurrentLocation().getExits().size(); i1++)
+					if (commandList.get(0).equals(Exit.dirName[i].toLowerCase())
+							|| commandList.get(0).equals(Exit.shortDirName[i].toLowerCase()))
 					{
-						if (Main.getGame().getCurrentLocation().getExits().get(i1).getDirection() == Exit.strToDir(Exit.shortDirName[i]))
+						for (int i1 = 0; i1 < Main.getGame().getCurrentLocation().getExits().size(); i1++)
 						{
-							Main.getGame().setCurrentLocation(Main.getGame().getCurrentLocation().getExits().get(i1).getLeadsTo());
-							return true;
+							if (Main.getGame().getCurrentLocation().getExits().get(i1).getDirection() == Exit.strToDir(Exit.shortDirName[i]))
+							{
+								Main.getGame().setCurrentLocation(Main.getGame().getCurrentLocation().getExits().get(i1).getLeadsTo());
+								return true;
+							}
 						}
+						System.out.println("You can't " + goCommand + " that way.");
+						return false;
 					}
-					System.out.println("You can't " + goCommand + " that way.");
-					return false;
 				}
 			}
 		}
@@ -220,6 +223,8 @@ public class CommandHandler
 			System.out.println("What do you want to " + commandList.get(0) + "?");
 			return false;
 		}
+		// End command: DROP/PUT(DOWN)/LEAVE
+		
 		// If nothing above happens, print error and return.
 		System.out.println("Sorry, I don't understand that.");
 		return false;

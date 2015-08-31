@@ -123,40 +123,47 @@ public class Game implements Runnable
     	// TODO Add items to rooms
     	backyard.addItem(new Item(
     			"House",
-    			"There is a yellow house to the west.",
     			"The house is wooden, and painted a pale yellow."
     					+ "\nIt appears to be relatively new."
     					+ "\nIt is obvious this family was of average wealth, and had children.",
+    			"There is a yellow house to the west.",
     					false));
     	backyard.addItem(new Item(
     			"Playset",
     			"The playset has a old swing and a slide.",
     			"There is a playset here.",
     			false));
+    	
+    	houseKitchen.addItem(new Item(
+    			"Wooden Table",
+    			"The table appears to be very old and ornate.",
+    			"There is a wooden table here.",
+    			false));
 	
     	// Exits
-    	emptyRoomSouth.addExit(new Exit(Exit.NORTH, hallway));		// North exit from Southern Empty Room to Hallway
+    	emptyRoomSouth.addExit(new Exit(Exit.NORTH, hallway));			// North exit from Southern Empty Room to Hallway
     	
-    	emptyRoomNorth.addExit(new Exit(Exit.SOUTH, hallway));		// South exit from Northern Empty Room to Hallway
-    	emptyRoomNorth.addExit(new Exit(Exit.UP, upwardTunnel));	// Upwards exit from Northern Empty Room to Upward Tunnel
+    	emptyRoomNorth.addExit(new Exit(Exit.SOUTH, hallway));			// South exit from Northern Empty Room to Hallway
+    	emptyRoomNorth.addExit(new Exit(Exit.UP, upwardTunnel));		// Upwards exit from Northern Empty Room to Upward Tunnel
     	emptyRoomNorth.addExit(new Exit(Exit.DOWN, downwardTunnel));	// Downwards exit from Northern Empty Room to Downward Tunnel
     	
-    	hallway.addExit(new Exit(Exit.SOUTH, emptyRoomSouth));		// South exit from Hallway to Southern Empty Room
-    	hallway.addExit(new Exit(Exit.NORTH, emptyRoomNorth));		// North exit from Hallway to Northern Empty Room
+    	hallway.addExit(new Exit(Exit.SOUTH, emptyRoomSouth));			// South exit from Hallway to Southern Empty Room
+    	hallway.addExit(new Exit(Exit.NORTH, emptyRoomNorth));			// North exit from Hallway to Northern Empty Room
     	
-    	upwardTunnel.addExit(new Exit(Exit.DOWN, emptyRoomNorth));	// Downwards exit from Upward Tunnel to Northern Empty Room
-    	upwardTunnel.addExit(new Exit(Exit.UP, backyard));		// Upwards exit from Upward Tunnel to Backyard
+    	upwardTunnel.addExit(new Exit(Exit.DOWN, emptyRoomNorth));		// Downwards exit from Upward Tunnel to Northern Empty Room
+    	upwardTunnel.addExit(new Exit(Exit.UP, backyard));				// Upwards exit from Upward Tunnel to Backyard
     	
-    	downwardTunnel.addExit(new Exit(Exit.UP, emptyRoomNorth));	// Upwards exit from Downward Tunnel to Northern Empty Room
-    	downwardTunnel.addExit(new Exit(Exit.DOWN, basement));		// Downwards exit from Downward Tunnel to Basement
+    	downwardTunnel.addExit(new Exit(Exit.UP, emptyRoomNorth));		// Upwards exit from Downward Tunnel to Northern Empty Room
+    	downwardTunnel.addExit(new Exit(Exit.DOWN, basement));			// Downwards exit from Downward Tunnel to Basement
     	
-    	basement.addExit(new Exit(Exit.UP, downwardTunnel));		// Upwards exit from Basement to Downwards Tunnel
+    	basement.addExit(new Exit(Exit.UP, downwardTunnel));			// Upwards exit from Basement to Downwards Tunnel
     	
-    	backyard.addExit(new Exit(Exit.DOWN, upwardTunnel));		// Downwards exit from Backyard to Upward Tunnel
-    	backyard.addExit(new Exit(Exit.WEST, houseKitchen));		// West exit from Backyard to Kitchen
-		backyard.addExit(new Exit(Exit.IN, houseKitchen));		// Inwards exit from Backyard to Kitchen (Alt. to West)
+    	backyard.addExit(new Exit(Exit.DOWN, upwardTunnel));			// Downwards exit from Backyard to Upward Tunnel
+    	backyard.addExit(new Exit(Exit.WEST, houseKitchen));			// West exit from Backyard to Kitchen
+		backyard.addExit(new Exit(Exit.IN, houseKitchen));				// Inwards exit from Backyard to Kitchen (Alt. to West)
 		
-		houseKitchen.addExit(new Exit(Exit.EAST, backyard));		// East exit from Kitchen to Backyard
+		houseKitchen.addExit(new Exit(Exit.EAST, backyard));			// East exit from Kitchen to Backyard
+		houseKitchen.addExit(new Exit(Exit.OUT, backyard));
 		
 		// Set spawn location
 		currentLocation = emptyRoomSouth;

@@ -7,7 +7,6 @@ public class Game implements Runnable
     private boolean				running				= false;						// Boolean is true if game thread is running
     private Thread				t					= new Thread(this);				// Thread object
     private Scanner				s					= new Scanner(System.in);		// Scanner for getting console input
-    private Random				r					= new Random();					// Random object for generating random numbers, etc.
     private Location			currentLocation;									// Current location object
     private ArrayList<Item>		inventory			= new ArrayList<Item>();		// Item inventory array
     private String[]			command;											// User input/command
@@ -123,7 +122,7 @@ public class Game implements Runnable
     					+ "\nIt appears to be relatively new."
     					+ "\nIt is obvious this family was of average wealth, and had children.",
     			"There is a yellow house to the west.",
-    					false));
+    			false));
     	backyard.addItem(new Item(
     			"Playset",
     			"The playset has a old swing and a slide.",
@@ -135,7 +134,7 @@ public class Game implements Runnable
     			"The table appears to be very old and ornate.",
     			"There is a wooden table here.",
     			false));
-	
+    	
     	// Exits
     	emptyRoomSouth.addExit(new Exit(Exit.NORTH, hallway));			// North exit from Southern Empty Room to Hallway
     	

@@ -1,12 +1,14 @@
 package ml.polymetric.textgame03;
 
+import java.util.Random;
+
 public class Main
 {
-	private static Game game; // Create new game object
+	private static Game		game	= new Game();	// Create new Game object
+    private static Random	r		= new Random(); // Create a Random object for generating random numbers, etc.
 	
 	public static void main(String[] args)
 	{
-		game = new Game();
 		game.start();
 		return;
 		// TODO Fix exit code

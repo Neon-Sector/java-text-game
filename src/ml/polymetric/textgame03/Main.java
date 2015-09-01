@@ -9,6 +9,7 @@ public class Main
 		game = new Game();
 		game.start();
 		return;
+		// TODO Fix exit code
 	}
 	
 	public static Game getGame()

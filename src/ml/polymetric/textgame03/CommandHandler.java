@@ -58,7 +58,7 @@ public class CommandHandler
 		// If the command only has one word, print error and return
 		catch (IndexOutOfBoundsException e) 
 		{
-			System.out.println("Where do you want to go?");
+			System.out.println("Where do you want to " + goCommand +"?");
 			return false;
 		}
 		// End go command
@@ -72,8 +72,7 @@ public class CommandHandler
 		
 		// COMMAND: LOOK/INSPECT/L
 		if (commandList.get(0).equals("look")
-				|| commandList.get(0).equals("inspect")
-				|| commandList.get(0).equals("l"))
+				|| commandList.get(0).equals("inspect"))
 		{
 			boolean at = false;
 			if (commandList.get(1).equals("at"))
@@ -87,12 +86,14 @@ public class CommandHandler
 				for (int i = 0; i < Main.getGame().getCurrentLocation().getItems().size(); i++)
 				{
 					String[] itemTitleArray = Main.getGame().getCurrentLocation().getItems().get(i).getTitle().toLowerCase().split(" ");
+					// TODO Fix this statement, it only gets the first word in the string even though there might be multiple
 					if (commandList.get(1).equals(Main.getGame().getCurrentLocation().getItems().get(i).getTitle().toLowerCase()))
 					{
 						System.out.println(Main.getGame().getCurrentLocation().getItems().get(i).getTitle());
 						System.out.println(Main.getGame().getCurrentLocation().getItems().get(i).getDescription());
 						return false;
 					}
+					
 					for (int i1 = 0; i1 < itemTitleArray.length; i1++)
 					{
 						if (commandList.get(i).equals(itemTitleArray[i1]))
@@ -106,6 +107,7 @@ public class CommandHandler
 			}
 			catch (IndexOutOfBoundsException e)
 			{
+				// TODO This part behaves weird, try to figure out why and fix it
 				if (at)
 				{
 					System.out.println("What do you want to look at?");
@@ -155,7 +157,8 @@ public class CommandHandler
 				}
 			}
 			
-			try // Try to print error message with item name
+			// Try to print error message with item name
+			try
 			{
 				System.out.println("You can't see a " + commandList.get(1) + " here.");
 				return false;

@@ -28,13 +28,10 @@ public class Game implements Runnable
     		System.out.println();
     		commandTrue = CommandHandler.execute(command);
     		if (commandTrue)
-    		{
     			printCurrentLocation();
-    		}
     		if (exit)
-    		{
     			break;
-    		}
+    			// TODO Fix exit code
     	}
 	
     	stop();
@@ -44,10 +41,10 @@ public class Game implements Runnable
     public void start()
     {
     	if (running) // If thread is already started, do not start it again
-    	{
     		return;
-    	}
+    	
     	running = true;
+    	
     	t.start();
     }
 	
@@ -55,10 +52,10 @@ public class Game implements Runnable
     public void stop()
     {
     	if (!running) // If thread is already stopped, do not stop it again
-    	{
     		return;
-    	}
+    	
     	running = false;
+    	
     	try
     	{
     		t.join();
@@ -119,7 +116,7 @@ public class Game implements Runnable
     			"You are in a small kitchen.");
 	
     	// Items
-    	// TODO Add items to rooms
+    	// TODO Add more items to rooms
     	backyard.addItem(new Item(
     			"House",
     			"The house is wooden, and painted a pale yellow."
@@ -162,7 +159,7 @@ public class Game implements Runnable
 		backyard.addExit(new Exit(Exit.IN, houseKitchen));				// Inwards exit from Backyard to Kitchen (Alt. to West)
 		
 		houseKitchen.addExit(new Exit(Exit.EAST, backyard));			// East exit from Kitchen to Backyard
-		houseKitchen.addExit(new Exit(Exit.OUT, backyard));
+		houseKitchen.addExit(new Exit(Exit.OUT, backyard));				// Outwards exit from Kitchen to Backyard (Alt. to East)
 		
 		// Set spawn location
 		currentLocation = emptyRoomSouth;
@@ -179,50 +176,34 @@ public class Game implements Runnable
     	// Print the current location's description
     	System.out.println(currentLocation.getDescription());
     	for (int i = 0; i < currentLocation.getItems().size(); i++)
-    	{
-    		System.out.println(currentLocation.getItems().get(i).getShortDesc());
-    	}
+    	{ System.out.println(currentLocation.getItems().get(i).getShortDesc()); }
     }
     
     // Gets current location
     public Location getCurrentLocation()
-    {
-    	return currentLocation;
-    }
+    { return currentLocation; }
     
     // Sets current location
     public void setCurrentLocation(Location currentLocation)
-    {
-    	this.currentLocation = currentLocation;
-    }
+    { this.currentLocation = currentLocation; }
     
     // Gets inventory
     public ArrayList<Item> getInventory()
-    {
-    	return inventory;
-    }
+    { return inventory; }
 	
     // Adds item to inventory
     public void addInventoryItem(Item item)
-    {
-    	inventory.add(item);
-    }
+    { inventory.add(item); }
     
     // Removes item from inventory
     public void removeInventoryItem(Item item)
-    {
-    	inventory.remove(item);
-    }
+    { inventory.remove(item); }
     
     // Checks if game will exit when loop is finished
     public boolean isExit()
-    {
-    	return exit;
-    }
+    { return exit; }
     
     // Sets if game will exit when loop is finished
     public void setExit(boolean exit)
-    {
-    	this.exit = exit;
-    }
+    { this.exit = exit; }
 }

@@ -61,7 +61,6 @@ public class Game implements Runnable
     	running = false;
     	try
     	{
-    		System.out.println("Test");
     		t.join();
     	}
     	catch (InterruptedException e)

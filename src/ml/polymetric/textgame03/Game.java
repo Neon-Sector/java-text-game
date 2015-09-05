@@ -13,7 +13,7 @@ public class Game implements Runnable
     private String[]			command;											// User input/command
     private boolean				commandTrue			= false;						// If the command returned true or not
     private boolean				exit				= false;						// Whether to end the loop or not
-    
+    private boolean				initialized			= false;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Main game loop method. This is called when start() is called. Do not call it on its own.
     @Override
@@ -30,13 +30,12 @@ public class Game implements Runnable
     		if (commandTrue)
     			printCurrentLocation();
     		if (exit)
-    			break;
-    			// TODO Fix exit code
+    			stop();
+    			System.exit(0);
     	}
 	
     	stop();
     }
-    
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Starts the thread, calls run method.
     public synchronized void start()
@@ -48,7 +47,6 @@ public class Game implements Runnable
     	
     	t.start();
     }
-    
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Stops the thread.
     public synchronized void stop()
@@ -67,10 +65,13 @@ public class Game implements Runnable
     		e.printStackTrace();
     	}
     }
-    
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    private void init()
+    private synchronized void init()
     {
+    	if(initialized)
+    		return;
+    	initialized = true;
+    	
     	// Locations
     	Location emptyRoomSouth = new Location(
     			"Southern Empty Room",
@@ -170,7 +171,6 @@ public class Game implements Runnable
 		// Print current location (Introductory)
 		printCurrentLocation();
     }
-    
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Prints the current location's title, description, and items.
     public void printCurrentLocation()
@@ -182,28 +182,14 @@ public class Game implements Runnable
     	for (int i = 0; i < currentLocation.getItems().size(); i++)
     	{ System.out.println(currentLocation.getItems().get(i).getShortDesc()); }
     }
-    
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Self-explanatory getters and setters
-    public Location getCurrentLocation()
-    { return currentLocation; }
-    
-    public void setCurrentLocation(Location currentLocation)
-    { this.currentLocation = currentLocation; }
-    
-    public ArrayList<Item> getInventory()
-    { return inventory; }
-	
-    public void addInventoryItem(Item item)
-    { inventory.add(item); }
-    
-    public void removeInventoryItem(Item item)
-    { inventory.remove(item); }
-    
-    public boolean isExit()
-    { return exit; }
-    
-    public void setExit(boolean exit)
-    { this.exit = exit; }
+    public Location			getCurrentLocation()							{return currentLocation;}
+    public void				setCurrentLocation(Location currentLocation)	{this.currentLocation = currentLocation;}
+    public ArrayList<Item>	getInventory()									{return inventory;}
+    public void				addInventoryItem(Item item)						{inventory.add(item);}
+    public void				removeInventoryItem(Item item)					{inventory.remove(item);}
+    public boolean			willExit()										{return exit;}
+    public void				exit(boolean exit)								{this.exit = exit;}
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }

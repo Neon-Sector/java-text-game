@@ -98,7 +98,7 @@ public class CommandHandler
 		// If command is "exit," set exit to true and return
 		if (commandList.get(0).equals("exit")) 
 		{
-			Main.getGame().setExit(true);
+			Main.getGame().exit(true);
 			return false;
 		}
 		

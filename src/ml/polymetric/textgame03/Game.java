@@ -1,5 +1,6 @@
 package ml.polymetric.textgame03;
 
+import java.net.*;
 import java.util.*;
 
 public class Game implements Runnable
@@ -7,13 +8,14 @@ public class Game implements Runnable
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private boolean				running				= false;						// Boolean is true if game thread is running
     private Thread				t					= new Thread(this);				// Thread object
+    private Random				r					= new Random();
     private Scanner				s					= new Scanner(System.in);		// Scanner for getting console input
     private Location			currentLocation;									// Current location object
     private ArrayList<Item>		inventory			= new ArrayList<Item>();		// Item inventory array
     private String[]			command;											// User input/command
     private boolean				commandTrue			= false;						// If the command returned true or not
     private boolean				exit				= false;						// Whether to end the loop or not
-    private boolean				initialized			= false;
+    private boolean				initialized			= false;						// If the Game.init() method has been called already
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Main game loop method. This is called when start() is called. Do not call it on its own.
     @Override
@@ -71,6 +73,58 @@ public class Game implements Runnable
     	if(initialized)
     		return;
     	initialized = true;
+    	
+    	// Debug bug reporting
+    	if (Main.debugMode)
+    	{
+    		String ipAddress = "Error";
+    		try
+    		{
+    			ipAddress = Inet4Address.getLocalHost().getHostAddress();
+    		}
+    		catch (UnknownHostException e) {}
+    		
+    		System.out.println("#--------------------------------------------------------------#");
+    		System.out.println("#                                                              #");
+    		System.out.println("# !!! DEBUG MODE !!!                                           #");
+    		System.out.println("#                                                              #");
+    		System.out.println("# This version of the game is in debug mode!                   #");
+    		System.out.println("# This means that you will recieve debug messages,             #");
+    		System.out.println("# And you get a bug report code.                               #");
+    		System.out.println("#                                                              #");
+    		System.out.println("# DEBUG CODE:                                                  #");
+    		System.out.println("#                                                              #");
+    		System.out.println("# (Generating)                                                 #");
+    		System.out.println("#                                                              #");
+    		System.out.println("#--------------------------------------------------------------#");
+    		
+    		long randSeed = 0;
+    		
+    		for (int i = 0; i < ipAddress.length(); i++)
+    			randSeed += (int) ipAddress.charAt(i) * 50000;
+    		
+    		if (randSeed < 1)
+    			randSeed = randSeed * -1;
+    		
+    		r.setSeed(randSeed);
+    		
+    		StringBuilder sb = new StringBuilder();
+    		char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+    		
+    		for (int i = 0; i < 16; i++)
+    		{
+    			sb.append(chars[r.nextInt(chars.length)]);
+    		}
+    		
+    		String randString = sb.toString();
+    		
+    		// TODO remove 192 characters/2 lines here
+    		
+    		System.out.println("# " + randString + "                                             #");
+    		System.out.println("#                                                              #");
+    		System.out.println("#--------------------------------------------------------------#");
+    	}
+    	// End debug mode initialization
     	
     	// Locations
     	Location emptyRoomSouth = new Location(

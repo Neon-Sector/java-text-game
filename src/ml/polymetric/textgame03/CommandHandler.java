@@ -6,22 +6,32 @@ public class CommandHandler
 {
 	public static boolean execute(String[] command)
 	{
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		ArrayList<String> commandList = new ArrayList<String>();
 		String goCommand = "go";
+		
+		// Temporary variables.
+		// TODO remember what these were for (lol) and implement it
 		boolean up = false;
 		boolean put = false;
+		boolean at = false;
+		
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		// If user didn't enter anything in, print error and return.
 		if (command == null)
 		{
 			System.out.println("Sorry, I don't understand that.");
 			return false;
 		}
+		
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		// Add command array to command ArrayList.
 		for (int i = 0; i < command.length; i++)
 		{
 			commandList.add(command[i]);
 		}
 		
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		// If first word in command is go/move/walk/run, remove it from command.
 		if (commandList.get(0).equals("go")
 				|| commandList.get(0).equals("move")
@@ -32,6 +42,24 @@ public class CommandHandler
 			commandList.remove(0);
 		}
 		
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
+		/* Go command
+		 *
+		 * Summary of the following code:
+		 *
+		 * 1. Check if the command size is less than three
+		 *
+		 * 2. For every direction name that exists, check if the command
+		 * equals that direction name or its short alias. (Direction ID = i)
+		 *
+		 * 3. For every exit in the current location, check if the command
+		 * equals the direction ID of i (the direction ID the user entered)
+		 *
+		 * 4. 
+		 *
+		 * TODO Optimize this code
+		 */
 		try
 		{
 			if (commandList.size() < 3)
@@ -55,6 +83,8 @@ public class CommandHandler
 				}
 			}
 		}
+		
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		// If the command only has one word, print error and return
 		catch (IndexOutOfBoundsException e) 
 		{
@@ -63,6 +93,8 @@ public class CommandHandler
 		}
 		// End go command
 		
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
 		// If command is "exit," set exit to true and return
 		if (commandList.get(0).equals("exit")) 
 		{
@@ -70,11 +102,11 @@ public class CommandHandler
 			return false;
 		}
 		
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		// COMMAND: LOOK/INSPECT/L
 		if (commandList.get(0).equals("look")
 				|| commandList.get(0).equals("inspect"))
 		{
-			boolean at = false;
 			if (commandList.get(1).equals("at"))
 			{
 				commandList.remove(1);
@@ -119,6 +151,8 @@ public class CommandHandler
 			return true;
 		}
 		// End command: LOOK/INSPECT/L
+		
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
 		// COMMAND: TAKE/PICK(UP)/GRAB/GET
 		if (commandList.get(0).equals("take")
@@ -175,6 +209,8 @@ public class CommandHandler
 		}
 		// End command: TAKE/PICK(UP)/GRAB/GET
 		
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
 		// COMMAND: DROP/PUT(DOWN)/LEAVE
 		if (commandList.get(0).equals("drop")
 				|| commandList.get(0).equals("put")
@@ -228,8 +264,11 @@ public class CommandHandler
 		}
 		// End command: DROP/PUT(DOWN)/LEAVE
 		
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
 		// If nothing above happens, print error and return.
 		System.out.println("Sorry, I don't understand that.");
 		return false;
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	}
 }

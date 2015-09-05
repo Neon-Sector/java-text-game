@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Game implements Runnable
 {
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private boolean				running				= false;						// Boolean is true if game thread is running
     private Thread				t					= new Thread(this);				// Thread object
     private Scanner				s					= new Scanner(System.in);		// Scanner for getting console input
@@ -13,7 +14,7 @@ public class Game implements Runnable
     private boolean				commandTrue			= false;						// If the command returned true or not
     private boolean				exit				= false;						// Whether to end the loop or not
     
-
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Main game loop method. This is called when start() is called. Do not call it on its own.
     @Override
     public void run()
@@ -36,8 +37,9 @@ public class Game implements Runnable
     	stop();
     }
     
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Starts the thread, calls run method.
-    public void start()
+    public synchronized void start()
     {
     	if (running) // If thread is already started, do not start it again
     		return;
@@ -46,9 +48,10 @@ public class Game implements Runnable
     	
     	t.start();
     }
-	
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Stops the thread.
-    public void stop()
+    public synchronized void stop()
     {
     	if (!running) // If thread is already stopped, do not stop it again
     		return;
@@ -65,6 +68,7 @@ public class Game implements Runnable
     	}
     }
     
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private void init()
     {
     	// Locations
@@ -167,6 +171,7 @@ public class Game implements Runnable
 		printCurrentLocation();
     }
     
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Prints the current location's title, description, and items.
     public void printCurrentLocation()
     {
@@ -178,31 +183,27 @@ public class Game implements Runnable
     	{ System.out.println(currentLocation.getItems().get(i).getShortDesc()); }
     }
     
-    // Gets current location
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Self-explanatory getters and setters
     public Location getCurrentLocation()
     { return currentLocation; }
     
-    // Sets current location
     public void setCurrentLocation(Location currentLocation)
     { this.currentLocation = currentLocation; }
     
-    // Gets inventory
     public ArrayList<Item> getInventory()
     { return inventory; }
 	
-    // Adds item to inventory
     public void addInventoryItem(Item item)
     { inventory.add(item); }
     
-    // Removes item from inventory
     public void removeInventoryItem(Item item)
     { inventory.remove(item); }
     
-    // Checks if game will exit when loop is finished
     public boolean isExit()
     { return exit; }
     
-    // Sets if game will exit when loop is finished
     public void setExit(boolean exit)
     { this.exit = exit; }
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }

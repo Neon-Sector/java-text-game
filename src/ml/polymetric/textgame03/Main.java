@@ -2,7 +2,7 @@ package ml.polymetric.textgame03;
 
 public class Main
 {
-    public static boolean debugMode	= true; // Whether to print debug messages/generate bug report code
+    public static boolean debugMode	= false; // Whether to print debug messages/generate bug report code
 	
 	private static Game	game = new Game(); // Create new Game object
 	

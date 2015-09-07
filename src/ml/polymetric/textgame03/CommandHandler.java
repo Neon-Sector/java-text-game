@@ -56,9 +56,8 @@ public class CommandHandler
 		 * 3. For every exit in the current location, check if the command
 		 * equals the direction ID of i (the direction ID the user entered)
 		 *
-		 * 4. 
+		 * 4. Set the current location to the location that the exit that has the specified location ID
 		 *
-		 * TODO Optimize this code
 		 */
 		try
 		{
@@ -160,7 +159,7 @@ public class CommandHandler
 				|| commandList.get(0).equals("grab")
 				|| commandList.get(0).equals("get"))
 		{
-			if (commandList.get(1).equals("up") && commandList.size() > 2)
+			if (commandList.get(1).equals("up") && commandList.size() > 2 && commandList.get(0).equals("pick"))
 			{
 				commandList.remove(1);
 				up = true;

@@ -32,8 +32,9 @@ public class Game implements Runnable
     		if (commandTrue)
     			printCurrentLocation();
     		if (exit)
-    			stop();
+    		{
     			System.exit(0);
+    		}
     	}
 	
     	stop();
@@ -130,7 +131,6 @@ public class Game implements Runnable
     	Location emptyRoomSouth = new Location(
     			"Southern Empty Room",
     			"You are in an empty room, with a wooden floor and white painted walls and roof."
-    					+ "\nTo the north there is a doorway to a long hallway."
     					+ "\nYou can see another room at the end.");
     	
     	Location emptyRoomNorth = new Location(
@@ -174,7 +174,17 @@ public class Game implements Runnable
     			"You are in a small kitchen.");
 	
     	// Items
+    	/*
+    	 * NOTE: New item syntax:
+    	 * 1. Name
+    	 * 2. Long Desc
+    	 * 3. Short Desc (e.g. "There is a(n) XXXX here")
+    	 */
     	// TODO Add more items to rooms
+    	emptyRoomSouth.addItem(new Item("Hallway",
+    			"The hallway ceiling leads upwards into darkness.",
+    			"\nTo the north there is a doorway to a long hallway.", false));
+    	
     	backyard.addItem(new Item(
     			"House",
     			"The house is wooden, and painted a pale yellow."

@@ -15,6 +15,7 @@ public class CommandHandler
 		boolean up = false;
 		boolean put = false;
 		boolean at = false;
+		boolean go = false;
 		
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		// If user didn't enter anything in, print error and return.
@@ -28,7 +29,7 @@ public class CommandHandler
 		// Add command array to command ArrayList.
 		for (int i = 0; i < command.length; i++)
 		{
-			commandList.add(command[i]);
+			commandList.add(command[i].toLowerCase());
 		}
 		
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -38,6 +39,7 @@ public class CommandHandler
 				|| commandList.get(0).equals("walk")
 				|| commandList.get(0).equals("run"))
 		{
+			go = true;
 			goCommand = commandList.get(0);
 			commandList.remove(0);
 		}
@@ -68,6 +70,7 @@ public class CommandHandler
 					if (commandList.get(0).equals(Exit.dirName[i].toLowerCase())
 							|| commandList.get(0).equals(Exit.shortDirName[i].toLowerCase()))
 					{
+						go = true;
 						for (int i1 = 0; i1 < Main.getGame().getCurrentLocation().getExits().size(); i1++)
 						{
 							if (Main.getGame().getCurrentLocation().getExits().get(i1).getDirection() == Exit.strToDir(Exit.shortDirName[i]))
@@ -82,7 +85,6 @@ public class CommandHandler
 				}
 			}
 		}
-		
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		// If the command only has one word, print error and return
 		catch (IndexOutOfBoundsException e) 

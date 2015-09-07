@@ -75,58 +75,6 @@ public class Game implements Runnable
     		return;
     	initialized = true;
     	
-    	// Debug bug reporting
-    	if (Main.debugMode)
-    	{
-    		String ipAddress = "Error";
-    		try
-    		{
-    			ipAddress = Inet4Address.getLocalHost().getHostAddress();
-    		}
-    		catch (UnknownHostException e) {}
-    		
-    		System.out.println("#--------------------------------------------------------------#");
-    		System.out.println("#                                                              #");
-    		System.out.println("# !!! DEBUG MODE !!!                                           #");
-    		System.out.println("#                                                              #");
-    		System.out.println("# This version of the game is in debug mode!                   #");
-    		System.out.println("# This means that you will recieve debug messages,             #");
-    		System.out.println("# And you get a bug report code.                               #");
-    		System.out.println("#                                                              #");
-    		System.out.println("# DEBUG CODE:                                                  #");
-    		System.out.println("#                                                              #");
-    		System.out.println("# (Generating)                                                 #");
-    		System.out.println("#                                                              #");
-    		System.out.println("#--------------------------------------------------------------#");
-    		
-    		long randSeed = 0;
-    		
-    		for (int i = 0; i < ipAddress.length(); i++)
-    			randSeed += (int) ipAddress.charAt(i) * 50000;
-    		
-    		if (randSeed < 1)
-    			randSeed = randSeed * -1;
-    		
-    		r.setSeed(randSeed);
-    		
-    		StringBuilder sb = new StringBuilder();
-    		char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
-    		
-    		for (int i = 0; i < 16; i++)
-    		{
-    			sb.append(chars[r.nextInt(chars.length)]);
-    		}
-    		
-    		String randString = sb.toString();
-    		
-    		// TODO remove 192 characters/2 lines here
-    		
-    		System.out.println("# " + randString + "                                             #");
-    		System.out.println("#                                                              #");
-    		System.out.println("#--------------------------------------------------------------#");
-    	}
-    	// End debug mode initialization
-    	
     	// Locations
     	Location emptyRoomSouth = new Location(
     			"Southern Empty Room",
@@ -155,15 +103,11 @@ public class Game implements Runnable
     	Location downwardTunnel = new Location(
     			"Downward Tunnel",
     			"You are in a vertical tunnel running downwards."
-    					+ "\nYou are climbing on a ladder. You cannot see the top."
-    					+ "\nAbove you, you see the tunnel runs through a bright room,"
-    					+ "\nand continues upwards into darkness.");
+    					+ "\nYou are climbing on a ladder. You cannot see the top.");
 	
     	Location basement = new Location(
     			"Basement",
-    			"You are in an old brick room."
-    					+ "\nThere is a ladder at the center, leading upwards."
-    					+ "\nThere is a grate in the floor, underneath which is a shallow empty sewer system.");
+    			"You are in an old brick room.");
 	
     	Location backyard = new Location(
     			"Backyard",
@@ -179,11 +123,40 @@ public class Game implements Runnable
     	 * 1. Name
     	 * 2. Long Desc
     	 * 3. Short Desc (e.g. "There is a(n) XXXX here")
+    	 * 4. boolean takeable
     	 */
     	// TODO Add more items to rooms
-    	emptyRoomSouth.addItem(new Item("Hallway",
+    	emptyRoomSouth.addItem(new Item(
+    			"Hallway",
     			"The hallway ceiling leads upwards into darkness.",
-    			"\nTo the north there is a doorway to a long hallway.", false));
+    			"To the north there is a doorway to a long hallway.",
+    			false));
+    	
+    	hallway.addItem(new Item(
+    			"Exits",
+    			"The exits lead to empty rooms.",
+    			"There are exits to empty rooms at the ends.",
+    			false));
+    	
+    	downwardTunnel.addItem(new Item(
+    			"Tunnel",
+    			"Above you, you see the tunnel runs through a bright room,"
+    					+ "\nand continues upwards into darkness.",
+    			"Above you, you see the tunnel runs through a bright room,"
+    					+ "\nand continues upwards into darkness.",
+    			false));
+    	
+    	basement.addItem(new Item(
+    			"Ladder",
+    			"The ladder seems to be relatively old,"
+    			+ "\nand is made of metal.",
+    			"There is a ladder at the center, leading upwards.",
+    			false));
+    	basement.addItem(new Item(
+    			"Grate",
+    			"The grate has hinges, and is unlocked. You could probably open it easily.",
+    			"There is a grate in the floor, underneath which is a shallow empty sewer system.",
+    			false));
     	
     	backyard.addItem(new Item(
     			"House",
@@ -244,7 +217,11 @@ public class Game implements Runnable
     	// Print the current location's description
     	System.out.println(currentLocation.getDescription());
     	for (int i = 0; i < currentLocation.getItems().size(); i++)
-    	{ System.out.println(currentLocation.getItems().get(i).getShortDesc()); }
+    	{ System.out.println(currentLocation.getItems().get(i).getShortDesc()); System.out.println(); }
+    	if (currentLocation.getItems().size() < 1)
+    	{
+    		System.out.println();
+    	}
     }
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Self-explanatory getters and setters

@@ -16,6 +16,7 @@ public class CommandHandler
 		boolean put = false;
 		boolean at = false;
 		boolean go = false;
+		boolean look = false;
 		
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		// If user didn't enter anything in, print error and return.
@@ -65,6 +66,11 @@ public class CommandHandler
 		{
 			if (commandList.size() < 3)
 			{
+				if (commandList.get(0).equals("left") || commandList.get(0).equals("right"))
+				{
+					System.out.println("You must specify a compass direction. (1)");
+					return false;
+				}
 				for (int i = 0; i < Exit.dirName.length; i++)
 				{
 					if (commandList.get(0).equals(Exit.dirName[i].toLowerCase())
@@ -84,14 +90,15 @@ public class CommandHandler
 					}
 				}
 			}
+			if (go)
+			{
+				System.out.println("You must specify a compass direction. (2)");
+				return false;
+			}
 		}
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		// If the command only has one word, print error and return
-		catch (IndexOutOfBoundsException e) 
-		{
-			System.out.println("Where do you want to " + goCommand +"?");
-			return false;
-		}
+		// Catch possible exception but don't do anything
+		catch (IndexOutOfBoundsException e) {}
 		// End go command
 		
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -108,10 +115,23 @@ public class CommandHandler
 		if (commandList.get(0).equals("look")
 				|| commandList.get(0).equals("inspect"))
 		{
-			if (commandList.get(1).equals("at"))
+			if (commandList.size() < 2)
 			{
-				commandList.remove(1);
-				at = true;
+				return true;
+			}
+			try
+			{
+				if (commandList.get(1).equals("at"))
+				{
+					commandList.remove(1);
+					at = true;
+				}
+			}
+			catch (IndexOutOfBoundsException e) {}
+			
+			if (commandList.get(0).equals("look"))
+			{
+				look = true;
 			}
 			
 			try
@@ -146,8 +166,6 @@ public class CommandHandler
 					System.out.println("What do you want to look at?");
 					return false;
 				}
-				System.out.println("What do you want to " + commandList.get(0) + "?");
-				return false;
 			}
 			return true;
 		}
@@ -174,28 +192,40 @@ public class CommandHandler
 			// Actual command code
 			for (int i = 0; i < Main.getGame().getCurrentLocation().getItems().size(); i++)
 			{
-				for (int i1 = 0; i1 < Main.getGame().getCurrentLocation().getItems().get(i1).getTitle().split(" ").length; i1++)
+				try
 				{
-					// If the item in the command is found
-					if (commandList.get(i1 + 1).equals(Main.getGame().getCurrentLocation().getItems().get(i).getTitle()))
+					for (int i1 = 0; i1 < Main.getGame().getCurrentLocation().getItems().get(i).getTitle().split(" ").length; i1++)
 					{
-						// If item is takeable
-						if (Main.getGame().getCurrentLocation().getItems().get(i).isTakeable())
+						// If the item in the command is found
+						if (commandList.get(i1).equals(Main.getGame().getCurrentLocation().getItems().get(i).getTitle()))
 						{
-							// Add item to inventory
-							Main.getGame().addInventoryItem(Main.getGame().getCurrentLocation().getItems().get(i));
-							// Remove item from location
-							Main.getGame().getCurrentLocation().removeItem(Main.getGame().getCurrentLocation().getItems().get(i));
-							return false;
+							// If item is takeable
+							if (Main.getGame().getCurrentLocation().getItems().get(i).isTakeable())
+							{
+								// Add item to inventory
+								Main.getGame().addInventoryItem(Main.getGame().getCurrentLocation().getItems().get(i));
+								// Remove item from location
+								Main.getGame().getCurrentLocation().removeItem(Main.getGame().getCurrentLocation().getItems().get(i));
+								return false;
+							}
 						}
 					}
 				}
+				catch (IndexOutOfBoundsException e) { e.printStackTrace(); }
 			}
 			
 			// Try to print error message with item name
 			try
 			{
-				System.out.println("You can't see a " + commandList.get(1) + " here.");
+				commandList.remove(0);
+				StringBuilder sb = new StringBuilder();
+				String wholeCommand;
+				for (int i = 0; i < commandList.size(); i++)
+				{
+					sb.append(commandList.get(i) + " ");
+				}
+				wholeCommand = sb.toString().trim();
+				System.out.println("You can't see a \"" + wholeCommand + "\" here.");
 				return false;
 			}
 			catch (IndexOutOfBoundsException e) {} // Catch the possible exception but don't do anything

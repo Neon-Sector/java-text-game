@@ -74,7 +74,8 @@ public class Game implements Runnable
     	if(initialized)
     		return;
     	initialized = true;
-    	
+
+    	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     	// Locations
     	Location emptyRoomSouth = new Location(
     			"Southern Empty Room",
@@ -84,14 +85,12 @@ public class Game implements Runnable
     	Location emptyRoomNorth = new Location(
     			"Northern Empty Room",
     			"You are in an empty room, with a wooden floor and white painted walls and roof."
-    					+ "\nTo the south there is a doorway to a long hallway."
     					+ "\nYou can see another room at the end." + "\nThere is a ladder in the center of the room,"
     					+ "\nLeading upwards and downwards.");
 	
     	Location hallway = new Location(
     			"Long Hallway",
-    			"You are in a long hallway leading north and south."
-    					+ "\nThere are exits to empty rooms at the ends.");
+    			"You are in a long hallway leading north and south.");
 	
     	Location upwardTunnel = new Location(
     			"Upward Tunnel",
@@ -116,10 +115,11 @@ public class Game implements Runnable
     	Location houseKitchen = new Location(
     			"Kitchen",
     			"You are in a small kitchen.");
-	
+
+    	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     	// Items
     	/*
-    	 * NOTE: New item syntax:
+    	 * New item syntax:
     	 * 1. Name
     	 * 2. Long Desc
     	 * 3. Short Desc (e.g. "There is a(n) XXXX here")
@@ -132,18 +132,41 @@ public class Game implements Runnable
     			"To the north there is a doorway to a long hallway.",
     			false));
     	
+    	emptyRoomNorth.addItem(new Item(
+    			"Hallway",
+    			"The hallway ceiling leads upwards into darkness.",
+    			"To the south there is a doorway to a long hallway.",
+    			true));
+    	
     	hallway.addItem(new Item(
     			"Exits",
     			"The exits lead to empty rooms.",
     			"There are exits to empty rooms at the ends.",
     			false));
+    	hallway.addItem(new ItemHolder(
+    			"Cardboard Box",
+    			"The cardboard box has nothing inside of it.",
+    			"There is a small cardboard box in the corner.",
+    			true));
     	
     	downwardTunnel.addItem(new Item(
-    			"Tunnel",
-    			"Above you, you see the tunnel runs through a bright room,"
+    			"Ladder",
+    			"You are climbing on a ladder. You cannot see the top."
+    			+ "Above you, you see the tunnel runs through a bright room,"
     					+ "\nand continues upwards into darkness.",
-    			"Above you, you see the tunnel runs through a bright room,"
+    			"You are climbing on a ladder. You cannot see the top."
+    			+ "Above you, you see the tunnel runs through a bright room,"
     					+ "\nand continues upwards into darkness.",
+    			false));
+    	
+    	downwardTunnel.addItem(new Item(
+    			"Ladder",
+    			"You are climbing on a ladder. You cannot see the bottom."
+    			+ "Below you, you see the tunnel runs through a bright room,"
+    					+ "\nand continues downwards into darkness.",
+    			"You are climbing on a ladder. You cannot see the bottom."
+    			+ "Below you, you see the tunnel runs through a bright room,"
+    					+ "\nand continues downwards into darkness.",
     			false));
     	
     	basement.addItem(new Item(
@@ -176,7 +199,8 @@ public class Game implements Runnable
     			"The table appears to be very old and ornate.",
     			"There is a wooden table here.",
     			false));
-    	
+
+    	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     	// Exits
     	emptyRoomSouth.addExit(new Exit(Exit.NORTH, hallway));			// North exit from Southern Empty Room to Hallway
     	
@@ -216,8 +240,9 @@ public class Game implements Runnable
     	System.out.println(currentLocation.getTitle());
     	// Print the current location's description
     	System.out.println(currentLocation.getDescription());
+    	System.out.println();
     	for (int i = 0; i < currentLocation.getItems().size(); i++)
-    	{ System.out.println(currentLocation.getItems().get(i).getShortDesc()); System.out.println(); }
+    	{ System.out.println(currentLocation.getItems().get(i).getShortDesc() + "\n"); }
     	if (currentLocation.getItems().size() < 1)
     	{
     		System.out.println();

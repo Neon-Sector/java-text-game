@@ -8,6 +8,7 @@ public class Location
 	private String				locDescription;		// E.g. "You are in a yellow house"
 	private ArrayList<Exit>		exits;				// Stores exits. THERE CAN ONLY BE ONE EXIT OF EACH DIRECTION!
 	private ArrayList<Item>		items;				// Stores items. TODO: Figure out what happens when multiple items of the same type are in array
+	private boolean				alreadyVisited;		// If the player has already visited this room
 	
 	// Blank constructor
 	// Try to avoid using this.
@@ -20,7 +21,7 @@ public class Location
 		this.exits = new ArrayList<Exit>();
 		this.items = new ArrayList<Item>();
 	}
-	
+
 	// Full constructor
 	public Location(String title, String description)
 	{
@@ -95,5 +96,15 @@ public class Location
 	public void setDescription(String locDescription)
 	{
 		this.locDescription = locDescription;
+	}
+	
+	public boolean hasAlreadyVisited()
+	{
+		return alreadyVisited;
+	}
+
+	public void setAlreadyVisited()
+	{
+		alreadyVisited = true;
 	}
 }

@@ -41,6 +41,7 @@ public class CommandHandler
 				|| commandList.get(0).equals("run"))
 		{
 			go = true;
+			Debug.print("command equals go");
 			goCommand = commandList.get(0);
 			commandList.remove(0);
 		}
@@ -92,6 +93,7 @@ public class CommandHandler
 			}
 			if (go)
 			{
+				Debug.print("go equals true");
 				System.out.println("You must specify a compass direction. (2)");
 				return false;
 			}

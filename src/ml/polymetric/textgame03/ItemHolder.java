@@ -27,4 +27,7 @@ public class ItemHolder extends Item
 		super(title, description, shortDesc, takeable);
 		this.maxItems = maxItems;
 	}
+
+	public int getMaxItems()				{return maxItems;}
+	public void setMaxItems(int maxItems)	{this.maxItems = maxItems;}
 }

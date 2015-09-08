@@ -31,16 +31,16 @@ public class Location
 		this.items = new ArrayList<Item>();
 	}
 	
-	public void addExit(Exit exit				{this.exits.add(exit);}
-	public void removeExit(Exit exit			{if (this.exits.contains(exit)) this.exits.remove(exit);}
-	public ArrayList<Exit> getExits()			{return (ArrayList<Exit>) this.exits.clone();}
-	public void addItem(Item item)				{this.items.add(item);}
-	public void removeItem(Item item)			{if (this.items.contains(items)) {this.items.remove(items);}}
-	public ArrayList<Item> getItems()			{return items;}
-	public String getTitle()				{return this.locTitle;}
-	public void setTitle(String locTitle)			{this.locTitle = locTitle;}
-	public String getDescription()				{return this.locDescription;}
+	public void addExit(Exit exit)						{this.exits.add(exit);}
+	public void removeExit(Exit exit)					{if (this.exits.contains(exit)) this.exits.remove(exit);}
+	public ArrayList<Exit> getExits()					{return (ArrayList<Exit>) this.exits.clone();}
+	public void addItem(Item item)						{this.items.add(item);}
+	public void removeItem(Item item)					{if (this.items.contains(items)) {this.items.remove(items);}}
+	public ArrayList<Item> getItems()					{return items;}
+	public String getTitle()							{return this.locTitle;}
+	public void setTitle(String locTitle)				{this.locTitle = locTitle;}
+	public String getDescription()						{return this.locDescription;}
 	public void setDescription(String locDescription)	{this.locDescription = locDescription;}
-	public boolean hasAlreadyVisited(			{return alreadyVisited;}
-	public void setAlreadyVisited()				{alreadyVisited = true;}
+	public boolean hasAlreadyVisited()					{return alreadyVisited;}
+	public void setAlreadyVisited()						{alreadyVisited = true;}
 }

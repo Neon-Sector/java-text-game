@@ -74,9 +74,9 @@ public class Exit
 		this.leadsTo = leadsTo;
 	}
 	
-	public Location getLeadsTo() {return leadsTo;}
-	public void setLeadsTo(Location leadsTo) {this.leadsTo = leadsTo;}
-	public int getDirection() {return direction;}
+	public Location getLeadsTo()				{return leadsTo;}
+	public void setLeadsTo(Location leadsTo)	{this.leadsTo = leadsTo;}
+	public int getDirection()					{return direction;}
 	public void setDirection(int direction)
 	{
 		this.direction = direction;
@@ -90,8 +90,8 @@ public class Exit
 		}
 	}
 	
-	public String getDirectionName() {return directionName;}
-	public String getShortDirectionName() {return shortDirectionName;}
+	public String getDirectionName()			{return directionName;}
+	public String getShortDirectionName()		{return shortDirectionName;}
 	
 	public static int strToDir(String str)
 	{

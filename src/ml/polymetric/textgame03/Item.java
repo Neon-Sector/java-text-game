@@ -26,12 +26,12 @@ public class Item
 		this.takeable = takeable;
 	}
 	
-	public String getTitle()				{return itemTitle;}
-	public void setTitle(String itemTitle)			{this.itemTitle = itemTitle;}
-	public String getDescription()				{return itemDescription;}
+	public String getTitle()							{return itemTitle;}
+	public void setTitle(String itemTitle)				{this.itemTitle = itemTitle;}
+	public String getDescription()						{return itemDescription;}
 	public void setDescription(String itemDescription)	{this.itemDescription = itemDescription;}
-	public String getShortDesc()				{return itemShortDesc;}
+	public String getShortDesc()						{return itemShortDesc;}
 	public void setShortDesc(String itemShortDesc)		{this.itemShortDesc = itemShortDesc;}
-	public boolean isTakeable()				{return takeable;}
-	public void setTakeable(boolean canTake)		{this.takeable = canTake;}
+	public boolean isTakeable()							{return takeable;}
+	public void setTakeable(boolean canTake)			{this.takeable = canTake;}
 }

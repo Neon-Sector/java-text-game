@@ -6,16 +6,16 @@ import java.util.*;
 public class Game implements Runnable
 {
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    private boolean				running				= false;						// Boolean is true if game thread is running
-    private Thread				t					= new Thread(this);				// Thread object
-    private Random				r					= new Random();
-    private Scanner				s					= new Scanner(System.in);		// Scanner for getting console input
-    private Location			currentLocation;									// Current location object
-    private ArrayList<Item>		inventory			= new ArrayList<Item>();		// Item inventory array
-    private String[]			command;											// User input/command
-    private boolean				commandTrue			= false;						// If the command returned true or not
-    private boolean				exit				= false;						// Whether to end the loop or not
-    private boolean				initialized			= false;						// If the Game.init() method has been called already
+    private boolean			running				= false;						// Boolean is true if game thread is running
+    private Thread			t					= new Thread(this);				// Thread object
+    private Random			r					= new Random();
+    private Scanner			s					= new Scanner(System.in);		// Scanner for getting console input
+    private Location		currentLocation;									// Current location object
+    private ArrayList<Item>	inventory			= new ArrayList<Item>();		// Item inventory array
+    private String[]		command;										// User input/command
+    private boolean			commandTrue			= false;						// If the command returned true or not
+    private boolean			exit				= false;						// Whether to end the loop or not
+    private boolean			initialized			= false;						// If the Game.init() method has been called already
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Main game loop method. This is called when start() is called. Do not call it on its own.
     @Override
@@ -192,6 +192,11 @@ public class Game implements Runnable
     			"Playset",
     			"The playset has a old swing and a slide.",
     			"There is a playset here.",
+    			false));
+    	backyard.addItem(new Item(
+    			"Trapdoor",
+    			"The trapdoor is round, and made of metal. It has hinges.",
+    			"There is a trapdoor in the ground.",
     			false));
     	
     	houseKitchen.addItem(new Item(

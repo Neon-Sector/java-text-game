@@ -26,51 +26,12 @@ public class Item
 		this.takeable = takeable;
 	}
 	
-	// Gets title
-	public String getTitle()
-	{
-		return itemTitle;
-	}
-	
-	// Sets title
-	public void setTitle(String itemTitle)
-	{
-		this.itemTitle = itemTitle;
-	}
-	
-	// Gets description
-	public String getDescription()
-	{
-		return itemDescription;
-	}
-	
-	// Sets description
-	public void setDescription(String itemDescription)
-	{
-		this.itemDescription = itemDescription;
-	}
-	
-	// Gets short description
-	public String getShortDesc()
-	{
-		return itemShortDesc;
-	}
-	
-	// Sets short description
-	public void setShortDesc(String itemShortDesc)
-	{
-		this.itemShortDesc = itemShortDesc;
-	}
-	
-	// Checks if the item is able to be picked up or not
-	public boolean isTakeable()
-	{
-		return takeable;
-	}
-	
-	// Sets if the item is able to be picked up or not
-	public void setTakeable(boolean canTake)
-	{
-		this.takeable = canTake;
-	}
+	public String getTitle()				{return itemTitle;}
+	public void setTitle(String itemTitle)			{this.itemTitle = itemTitle;}
+	public String getDescription()				{return itemDescription;}
+	public void setDescription(String itemDescription)	{this.itemDescription = itemDescription;}
+	public String getShortDesc()				{return itemShortDesc;}
+	public void setShortDesc(String itemShortDesc)		{this.itemShortDesc = itemShortDesc;}
+	public boolean isTakeable()				{return takeable;}
+	public void setTakeable(boolean canTake)		{this.takeable = canTake;}
 }

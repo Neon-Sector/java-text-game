@@ -31,80 +31,16 @@ public class Location
 		this.items = new ArrayList<Item>();
 	}
 	
-	// Adds an exit. E.g. opening doors.
-	public void addExit(Exit exit)
-	{
-		this.exits.add(exit);
-	}
-	
-	// Removes an exit. E.g. closing doors.
-	public void removeExit(Exit exit)
-	{
-		if (this.exits.contains(exit))
-		{
-			this.exits.remove(exit);
-		}
-	}
-	
-	// Gets exit array
-	@SuppressWarnings("unchecked") // Not sure why this warning is here, but it doesn't matter.
-	public ArrayList<Exit> getExits()
-	{
-		return (ArrayList<Exit>) this.exits.clone();
-	}
-	
-	// Adds an item
-	public void addItem(Item item)
-	{
-		this.items.add(item);
-	}
-	
-	// Removes an item
-	public void removeItem(Item item)
-	{
-		if (this.items.contains(items))
-		{
-			this.items.remove(items);
-		}
-	}
-	
-	// Gets item array
-	public ArrayList<Item> getItems()
-	{
-		return items;
-	}
-	
-	// Gets title
-	public String getTitle()
-	{
-		return this.locTitle;
-	}
-	
-	// Sets title
-	public void setTitle(String locTitle)
-	{
-		this.locTitle = locTitle;
-	}
-	
-	// Gets description
-	public String getDescription()
-	{
-		return this.locDescription;
-	}
-	
-	// Sets description
-	public void setDescription(String locDescription)
-	{
-		this.locDescription = locDescription;
-	}
-	
-	public boolean hasAlreadyVisited()
-	{
-		return alreadyVisited;
-	}
-
-	public void setAlreadyVisited()
-	{
-		alreadyVisited = true;
-	}
+	public void addExit(Exit exit				{this.exits.add(exit);}
+	public void removeExit(Exit exit			{if (this.exits.contains(exit)) this.exits.remove(exit);}
+	public ArrayList<Exit> getExits()			{return (ArrayList<Exit>) this.exits.clone();}
+	public void addItem(Item item)				{this.items.add(item);}
+	public void removeItem(Item item)			{if (this.items.contains(items)) {this.items.remove(items);}}
+	public ArrayList<Item> getItems()			{return items;}
+	public String getTitle()				{return this.locTitle;}
+	public void setTitle(String locTitle)			{this.locTitle = locTitle;}
+	public String getDescription()				{return this.locDescription;}
+	public void setDescription(String locDescription)	{this.locDescription = locDescription;}
+	public boolean hasAlreadyVisited(			{return alreadyVisited;}
+	public void setAlreadyVisited()				{alreadyVisited = true;}
 }

@@ -7,15 +7,15 @@ public class Exit
 	public static final int			SOUTH			= 2;
 	public static final int			EAST			= 3;
 	public static final int			WEST			= 4;
-	public static final int			UP				= 5;
+	public static final int			UP			= 5;
 	public static final int			DOWN			= 6;
 	public static final int			NORTHEAST		= 7;
 	public static final int			NORTHWEST		= 8;
 	public static final int			SOUTHEAST		= 9;
 	public static final int			SOUTHWEST		= 10;
-	public static final int			IN				= 11;
-	public static final int			OUT				= 12;
-	public static final String[]	dirName			=
+	public static final int			IN			= 11;
+	public static final int			OUT			= 12;
+	public static final String[] dirName	=
 			{
 					"UNDEFINED",
 					"NORTH",
@@ -31,7 +31,7 @@ public class Exit
 					"IN",
 					"OUT"
 			};
-	public static final String[]	shortDirName	=
+	public static final String[] shortDirName =
 			{
 					"NULL",
 					"N",
@@ -74,21 +74,9 @@ public class Exit
 		this.leadsTo = leadsTo;
 	}
 	
-	public Location getLeadsTo()
-	{
-		return leadsTo;
-	}
-	
-	public void setLeadsTo(Location leadsTo)
-	{
-		this.leadsTo = leadsTo;
-	}
-	
-	public int getDirection()
-	{
-		return direction;
-	}
-	
+	public Location getLeadsTo() {return leadsTo;}
+	public void setLeadsTo(Location leadsTo) {this.leadsTo = leadsTo;}
+	public int getDirection() {return direction;}
 	public void setDirection(int direction)
 	{
 		this.direction = direction;
@@ -102,15 +90,8 @@ public class Exit
 		}
 	}
 	
-	public String getDirectionName()
-	{
-		return directionName;
-	}
-	
-	public String getShortDirectionName()
-	{
-		return shortDirectionName;
-	}
+	public String getDirectionName() {return directionName;}
+	public String getShortDirectionName() {return shortDirectionName;}
 	
 	public static int strToDir(String str)
 	{

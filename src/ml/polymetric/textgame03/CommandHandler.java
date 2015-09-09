@@ -78,11 +78,11 @@ public class CommandHandler
 							|| commandList.get(0).equals(Exit.shortDirName[i].toLowerCase()))
 					{
 						go = true;
-						for (int i1 = 0; i1 < Main.getGame().getCurrentLocation().getExits().size(); i1++)
+						for (int i1 = 0; i1 < Launcher.getGame().getCurrentLocation().getExits().size(); i1++)
 						{
-							if (Main.getGame().getCurrentLocation().getExits().get(i1).getDirection() == Exit.strToDir(Exit.shortDirName[i]))
+							if (Launcher.getGame().getCurrentLocation().getExits().get(i1).getDirection() == Exit.strToDir(Exit.shortDirName[i]))
 							{
-								Main.getGame().setCurrentLocation(Main.getGame().getCurrentLocation().getExits().get(i1).getLeadsTo());
+								Launcher.getGame().setCurrentLocation(Launcher.getGame().getCurrentLocation().getExits().get(i1).getLeadsTo());
 								return true;
 							}
 						}
@@ -108,7 +108,7 @@ public class CommandHandler
 		// If command is "exit," set exit to true and return
 		if (commandList.get(0).equals("exit")) 
 		{
-			Main.getGame().exit(true);
+			Launcher.getGame().exit(true);
 			return false;
 		}
 		
@@ -138,14 +138,14 @@ public class CommandHandler
 			
 			try
 			{
-				for (int i = 0; i < Main.getGame().getCurrentLocation().getItems().size(); i++)
+				for (int i = 0; i < Launcher.getGame().getCurrentLocation().getItems().size(); i++)
 				{
-					String[] itemTitleArray = Main.getGame().getCurrentLocation().getItems().get(i).getTitle().toLowerCase().split(" ");
+					String[] itemTitleArray = Launcher.getGame().getCurrentLocation().getItems().get(i).getTitle().toLowerCase().split(" ");
 					// TODO Fix this statement, it only gets the first word in the string even though there might be multiple
-					if (commandList.get(1).equals(Main.getGame().getCurrentLocation().getItems().get(i).getTitle().toLowerCase()))
+					if (commandList.get(1).equals(Launcher.getGame().getCurrentLocation().getItems().get(i).getTitle().toLowerCase()))
 					{
-						System.out.println(Main.getGame().getCurrentLocation().getItems().get(i).getTitle());
-						System.out.println(Main.getGame().getCurrentLocation().getItems().get(i).getDescription());
+						System.out.println(Launcher.getGame().getCurrentLocation().getItems().get(i).getTitle());
+						System.out.println(Launcher.getGame().getCurrentLocation().getItems().get(i).getDescription());
 						return false;
 					}
 					
@@ -153,8 +153,8 @@ public class CommandHandler
 					{
 						if (commandList.get(i).equals(itemTitleArray[i1]))
 						{
-							System.out.println(Main.getGame().getCurrentLocation().getItems().get(i).getTitle());
-							System.out.println(Main.getGame().getCurrentLocation().getItems().get(i).getDescription());
+							System.out.println(Launcher.getGame().getCurrentLocation().getItems().get(i).getTitle());
+							System.out.println(Launcher.getGame().getCurrentLocation().getItems().get(i).getDescription());
 							return false;
 						}
 					}
@@ -186,28 +186,28 @@ public class CommandHandler
 				commandList.remove(1);
 				up = true;
 			}
-			if (Main.getGame().getCurrentLocation().getItems().size() < 1)
+			if (Launcher.getGame().getCurrentLocation().getItems().size() < 1)
 			{
 				return false;
 			}
 			
 			// Actual command code
-			for (int i = 0; i < Main.getGame().getCurrentLocation().getItems().size(); i++)
+			for (int i = 0; i < Launcher.getGame().getCurrentLocation().getItems().size(); i++)
 			{
 				try
 				{
-					for (int i1 = 0; i1 < Main.getGame().getCurrentLocation().getItems().get(i).getTitle().split(" ").length; i1++)
+					for (int i1 = 0; i1 < Launcher.getGame().getCurrentLocation().getItems().get(i).getTitle().split(" ").length; i1++)
 					{
 						// If the item in the command is found
-						if (commandList.get(i1).equals(Main.getGame().getCurrentLocation().getItems().get(i).getTitle()))
+						if (commandList.get(i1).equals(Launcher.getGame().getCurrentLocation().getItems().get(i).getTitle()))
 						{
 							// If item is takeable
-							if (Main.getGame().getCurrentLocation().getItems().get(i).isTakeable())
+							if (Launcher.getGame().getCurrentLocation().getItems().get(i).isTakeable())
 							{
 								// Add item to inventory
-								Main.getGame().addInventoryItem(Main.getGame().getCurrentLocation().getItems().get(i));
+								Launcher.getGame().addInventoryItem(Launcher.getGame().getCurrentLocation().getItems().get(i));
 								// Remove item from location
-								Main.getGame().getCurrentLocation().removeItem(Main.getGame().getCurrentLocation().getItems().get(i));
+								Launcher.getGame().getCurrentLocation().removeItem(Launcher.getGame().getCurrentLocation().getItems().get(i));
 								return false;
 							}
 						}
@@ -254,26 +254,26 @@ public class CommandHandler
 				commandList.remove(1);
 				up = true;
 			}
-			if (Main.getGame().getCurrentLocation().getItems().size() < 1)
+			if (Launcher.getGame().getCurrentLocation().getItems().size() < 1)
 			{
 				return false;
 			}
 			
 			// Actual command code
-			for (int i = 0; i < Main.getGame().getCurrentLocation().getItems().size(); i++)
+			for (int i = 0; i < Launcher.getGame().getCurrentLocation().getItems().size(); i++)
 			{
-				for (int i1 = 0; i1 < Main.getGame().getCurrentLocation().getItems().get(i1).getTitle().split(" ").length; i1++)
+				for (int i1 = 0; i1 < Launcher.getGame().getCurrentLocation().getItems().get(i1).getTitle().split(" ").length; i1++)
 				{
 					// If the item in the command is found
-					if (commandList.get(i1 + 1).equals(Main.getGame().getCurrentLocation().getItems().get(i).getTitle()))
+					if (commandList.get(i1 + 1).equals(Launcher.getGame().getCurrentLocation().getItems().get(i).getTitle()))
 					{
 						// If item is takeable
-						if (Main.getGame().getCurrentLocation().getItems().get(i).isTakeable())
+						if (Launcher.getGame().getCurrentLocation().getItems().get(i).isTakeable())
 						{
 							// Add item to inventory
-							Main.getGame().removeInventoryItem(Main.getGame().getInventory().get(i));
+							Launcher.getGame().removeInventoryItem(Launcher.getGame().getInventory().get(i));
 							// Remove item from location
-							Main.getGame().getCurrentLocation().addItem(Main.getGame().getInventory().get(i));
+							Launcher.getGame().getCurrentLocation().addItem(Launcher.getGame().getInventory().get(i));
 							return false;
 						}
 					}

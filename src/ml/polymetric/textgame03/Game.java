@@ -17,7 +17,7 @@ public class Game implements Runnable
     private boolean			exit				= false;						// Whether to end the loop or not
     private boolean			initialized			= false;						// If the Game.init() method has been called already
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Main game loop method. This is called when start() is called. Do not call it on its own.
+    // Launcher game loop method. This is called when start() is called. Do not call it on its own.
     @Override
     public void run()
     {

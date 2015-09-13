@@ -191,43 +191,39 @@ public class CommandHandler
 				return false;
 			}
 			
+			commandList.remove(0);
+			
 			// Actual command code
 			for (int i = 0; i < Launcher.getGame().getCurrentLocation().getItems().size(); i++)
 			{
-				try
+				for (int i1 = 0; i1 < commandList.size(); i1++)
 				{
-					for (int i1 = 0; i1 < Launcher.getGame().getCurrentLocation().getItems().get(i).getTitle().split(" ").length; i1++)
+					for (int i2 = 0; i2 < Launcher.getGame().getCurrentLocation().getItems().get(i).getTitle().split(" ").length; i2++)
 					{
-						// If the item in the command is found
-						if (commandList.get(i1).equals(Launcher.getGame().getCurrentLocation().getItems().get(i).getTitle()))
+						if (Launcher.getGame().getCurrentLocation().getItems().get(i).getTitle().split(" ")[i2].equals(commandList.get(i1)))
 						{
-							// If item is takeable
 							if (Launcher.getGame().getCurrentLocation().getItems().get(i).isTakeable())
 							{
-								// Add item to inventory
 								Launcher.getGame().addInventoryItem(Launcher.getGame().getCurrentLocation().getItems().get(i));
-								// Remove item from location
 								Launcher.getGame().getCurrentLocation().removeItem(Launcher.getGame().getCurrentLocation().getItems().get(i));
-								return false;
 							}
+							System.out.println("You can't take the " + Launcher.getGame().getCurrentLocation().getItems().get(i).getTitle() + "!");
 						}
 					}
 				}
-				catch (IndexOutOfBoundsException e) { e.printStackTrace(); }
 			}
 			
 			// Try to print error message with item name
 			try
 			{
-				commandList.remove(0);
 				StringBuilder sb = new StringBuilder();
 				String wholeCommand;
 				for (int i = 0; i < commandList.size(); i++)
 				{
 					sb.append(commandList.get(i) + " ");
 				}
-				wholeCommand = sb.toString().trim();
-				System.out.println("You can't see a \"" + wholeCommand + "\" here.");
+				wholeCommand = sb.toString().trim().toLowerCase();
+				System.out.println("You can't see a " + wholeCommand + " here.");
 				return false;
 			}
 			catch (IndexOutOfBoundsException e) {} // Catch the possible exception but don't do anything

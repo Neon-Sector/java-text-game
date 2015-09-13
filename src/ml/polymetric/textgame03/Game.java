@@ -1,6 +1,5 @@
 package ml.polymetric.textgame03;
 
-import java.net.*;
 import java.util.*;
 
 public class Game implements Runnable
@@ -8,11 +7,10 @@ public class Game implements Runnable
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private boolean			running				= false;						// Boolean is true if game thread is running
     private Thread			t					= new Thread(this);				// Thread object
-    private Random			r					= new Random();
     private Scanner			s					= new Scanner(System.in);		// Scanner for getting console input
     private Location		currentLocation;									// Current location object
     private ArrayList<Item>	inventory			= new ArrayList<Item>();		// Item inventory array
-    private String[]		command;										// User input/command
+    private String[]		command;											// User input/command
     private boolean			commandTrue			= false;						// If the command returned true or not
     private boolean			exit				= false;						// Whether to end the loop or not
     private boolean			initialized			= false;						// If the Game.init() method has been called already
